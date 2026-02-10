@@ -9,9 +9,11 @@ RUN docker-php-ext-enable mongodb
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.lock* /var/www/
+COPY src/ /var/www/src/
 WORKDIR /var/www
 RUN composer install --ignore-platform-req=ext-mongodb --no-dev
 
-COPY src/ /var/www/html/
+# Copy src to the html serving directory as well
+RUN cp -a /var/www/src/. /var/www/html/
 
 USER php

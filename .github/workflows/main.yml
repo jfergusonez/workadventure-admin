@@ -27,6 +27,6 @@ jobs:
 
       - uses: docker/build-push-action@v5
         with:
-          context: ./php
+          context: ./containers/php
           push: true
           tags: ${{ env.IMAGE_PREFIX }}-php:latest,${{ env.IMAGE_PREFIX }}-php:${{ github.sha }}
